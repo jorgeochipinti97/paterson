@@ -6,9 +6,13 @@ import useProducts from "@/hook/useProducts";
 import { Cart } from "@/components/Cart";
 import { useEffect } from "react";
 import gsap, { Power1 } from "gsap";
+import { useAlert } from "@/hook/useAlert";
+import { AlertComponent } from "@/components/ui/AlertComponent";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 
 export default function Home() {
   const { products } = useProducts();
+  const { alertProps } = useAlert();
 
   useEffect(() => {
     products &&
@@ -42,7 +46,26 @@ export default function Home() {
   }, [products]);
   return (
     <div>
-      <div className="fixed right-2 bottom-3 md:hidden  mt-5 z-50">
+      <Alert
+        style={{ opacity: 0, display: "none" }}
+        className="alerta fixed bottom-2 right-2 z-50 w-fit p-5"
+      >
+        <svg
+          width={25}
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <AlertTitle>Producto añadido con éxito</AlertTitle>
+      </Alert>
+      <div className="fixed right-2 bottom-3 md:hidden  mt-5 ">
         <Cart />
       </div>
       <div className="h-fit relative w-full overflow-hidden bg-slate-900  py-10">
@@ -61,7 +84,7 @@ export default function Home() {
         >
           Importaciones tecnológicas.
         </p>
-        <div className="flex justify-center -z-40">
+        <div className="flex justify-center ">
           <video
             src="/video.mp4"
             className="h-[60vh] video rounded-xl mt-5 shadowBoxLow"
@@ -89,7 +112,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-
 
       <Navbar />
     </div>

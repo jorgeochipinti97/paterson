@@ -1,20 +1,19 @@
+"use client";
 import React from "react";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import { formatPrice } from "@/lib/utils";
 import { CheckoutForm } from "../Forms/checkoutForms";
 import useCartStore from "@/hook/useCartStore";
+import { useAlert } from "@/hook/useAlert";
+import { AlertComponent } from "../ui/AlertComponent";
+import gsap, { Power1 } from "gsap";
 export const CardProduct = ({ product }) => {
   const agregarProducto = useCartStore((state) => state.agregarProducto);
 
@@ -51,14 +50,30 @@ export const CardProduct = ({ product }) => {
           <div className="my-1">
             <Button
               variant="outline"
-              onClick={() =>
+              onClick={() => {
                 agregarProducto({
                   title: product.title,
                   price: product.discountPrice,
                   images: product.images,
                   _id: product._id,
-                })
-              }
+                });
+                gsap.to(".alerta", {
+                  display: "block",
+                });
+                gsap.to(".alerta", {
+                  opacity: 1,
+                  ease: Power1.easeIn,
+                });
+                gsap.to(".alerta", {
+                  delay: 1.5,
+                  opacity: 0,
+                  ease: Power1.easeIn,
+                });
+                gsap.to(".alerta", {
+                  delay: 2,
+                  display: "none",
+                });
+              }}
             >
               Agregar al carrito
             </Button>
