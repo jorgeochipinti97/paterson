@@ -14,21 +14,25 @@ export default function Home() {
       opacity: 1,
       ease: Power1.easeIn,
       delay: 0.5,
+      duration: 0.5,
     });
     gsap.to(".text-one", {
       opacity: 1,
       ease: Power1.easeIn,
       delay: 0.2,
+      duration: 0.5,
     });
     gsap.to(".text-two", {
       opacity: 1,
       ease: Power1.easeIn,
       delay: 0.4,
+      duration: 0.5,
     });
     gsap.to(".text-three", {
       opacity: 1,
       ease: Power1.easeIn,
       delay: 0.7,
+      duration: 0.5,
     });
   }, []);
   return (
@@ -43,10 +47,16 @@ export default function Home() {
           <p className=" text-4xl  md:hidden uppercase textGradient  font-extrabold text-center tracking-tighter font-geist ">
             Dublin Store
           </p>
-          <p style={{opacity:.5}} className=" text-one text-green-100 text-3xl md:text-5xl uppercase  font-extrabold text-center tracking-tighter font-geist mt-10 ">
+          <p
+            style={{ opacity: 0.5 }}
+            className=" text-one text-green-100 text-3xl md:text-5xl uppercase  font-extrabold text-center tracking-tighter font-geist mt-10 "
+          >
             Tu socio comercial
           </p>
-          <p style={{opacity:.5}} className=" text-two  text-xl uppercase text-teal-100  font-light text-center tracking-tighter font-mono mt-2">
+          <p
+            style={{ opacity: 0.5 }}
+            className=" text-two  text-xl uppercase text-teal-100  font-light text-center tracking-tighter font-mono mt-2"
+          >
             Importaciones tecnológicas.
           </p>
           <div className="flex justify-center -z-40">
@@ -61,7 +71,10 @@ export default function Home() {
             />
           </div>
           <section>
-            <p style={{opacity:.5}} className="text-three text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20">
+            <p
+              style={{ opacity: 0.5 }}
+              className="text-three text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20"
+            >
               Oferta mensual
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 mt-10 w-screen">
