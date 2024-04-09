@@ -9,32 +9,37 @@ import gsap, { Power1 } from "gsap";
 
 export default function Home() {
   const { products } = useProducts();
+
   useEffect(() => {
-    gsap.to(".video", {
-      opacity: 1,
-      ease: Power1.easeIn,
-      delay: 0.5,
-      duration: 0.5,
-    });
-    gsap.to(".text-one", {
-      opacity: 1,
-      ease: Power1.easeIn,
-      delay: 0.2,
-      duration: 0.5,
-    });
-    gsap.to(".text-two", {
-      opacity: 1,
-      ease: Power1.easeIn,
-      delay: 0.4,
-      duration: 0.5,
-    });
-    gsap.to(".text-three", {
-      opacity: 1,
-      ease: Power1.easeIn,
-      delay: 0.7,
-      duration: 0.5,
-    });
-  }, []);
+    products &&
+      gsap.to(".video", {
+        opacity: 1,
+        ease: Power1.easeIn,
+        delay: 0.5,
+        duration: 0.5,
+      });
+    products &&
+      gsap.to(".text-one", {
+        opacity: 1,
+        ease: Power1.easeIn,
+        delay: 0.2,
+        duration: 0.5,
+      });
+    products &&
+      gsap.to(".text-two", {
+        opacity: 1,
+        ease: Power1.easeIn,
+        delay: 0.4,
+        duration: 0.5,
+      });
+    products &&
+      gsap.to(".text-three", {
+        opacity: 1,
+        ease: Power1.easeIn,
+        delay: 0.7,
+        duration: 0.5,
+      });
+  }, [products]);
   return (
     <div>
       <div className="fixed right-2 bottom-3 md:hidden  mt-5 z-50">
