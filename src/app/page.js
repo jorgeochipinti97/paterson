@@ -46,56 +46,52 @@ export default function Home() {
         <Cart />
       </div>
       <div className="h-fit relative w-full overflow-hidden bg-slate-900  py-10">
-        <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
-
-        <div className="relative z-20">
-          <p className=" text-4xl  md:hidden uppercase textGradient  font-extrabold text-center tracking-tighter font-geist ">
-            Dublin Store
-          </p>
-          <p
-            style={{ opacity: 0.5 }}
-            className=" text-one text-green-100 text-3xl md:text-5xl uppercase  font-extrabold text-center tracking-tighter font-geist mt-10 "
-          >
-            Tu socio comercial
-          </p>
-          <p
-            style={{ opacity: 0.5 }}
-            className=" text-two  text-xl uppercase text-teal-100  font-light text-center tracking-tighter font-mono mt-2"
-          >
-            Importaciones tecnológicas.
-          </p>
-          <div className="flex justify-center -z-40">
-            <video
-              src="/video.mp4"
-              className="h-[60vh] video rounded-xl mt-5 shadowBoxLow"
-              style={{ opacity: 0 }}
-              autoPlay
-              playsInline
-              muted
-              loop
-            />
-          </div>
-          <section>
-            <p
-              style={{ opacity: 0.5 }}
-              className="text-three text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20"
-            >
-              Oferta mensual
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 mt-10 w-screen">
-              {products &&
-                products.map((e) => (
-                  <div key={e.title} className="flex justify-center">
-                    <CardProduct product={e} />
-                  </div>
-                ))}
-            </div>
-          </section>
+        <p className=" text-4xl  md:hidden uppercase textGradient  font-extrabold text-center tracking-tighter font-geist ">
+          Dublin Store
+        </p>
+        <p
+          style={{ opacity: 0.5 }}
+          className=" text-one text-green-100 text-3xl md:text-5xl uppercase  font-extrabold text-center tracking-tighter font-geist mt-10 "
+        >
+          Tu socio comercial
+        </p>
+        <p
+          style={{ opacity: 0.5 }}
+          className=" text-two  text-xl uppercase text-teal-100  font-light text-center tracking-tighter font-mono mt-2"
+        >
+          Importaciones tecnológicas.
+        </p>
+        <div className="flex justify-center -z-40">
+          <video
+            src="/video.mp4"
+            className="h-[60vh] video rounded-xl mt-5 shadowBoxLow"
+            style={{ opacity: 0 }}
+            autoPlay
+            playsInline
+            muted
+            loop
+          />
         </div>
-        <Boxes />
-
-        <Navbar />
+        <section>
+          <p
+            style={{ opacity: 0.5 }}
+            className="text-three text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20"
+          >
+            Oferta mensual
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 mt-10 w-screen">
+            {products &&
+              products.map((e) => (
+                <div key={e.title} className="flex justify-center">
+                  <CardProduct product={e} />
+                </div>
+              ))}
+          </div>
+        </section>
       </div>
+
+
+      <Navbar />
     </div>
   );
 }
