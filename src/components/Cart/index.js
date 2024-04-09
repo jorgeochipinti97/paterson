@@ -48,7 +48,7 @@ export const Cart = () => {
   );
 
   return (
-    <AlertDialog>
+    <AlertDialog className='z-50'>
       <AlertDialogTrigger asChild>
         <Button variant="icon" className="bg-[#047857]">
           <span className="bg-sky-50 border border-black px-2 text-black  absolute bottom-8 right-10 text-md font-geist rounded-full">

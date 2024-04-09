@@ -65,7 +65,7 @@ export default function Home() {
         </svg>
         <AlertTitle>Producto añadido con éxito</AlertTitle>
       </Alert>
-      <div className="fixed right-2 bottom-3 md:hidden  mt-5 ">
+      <div className="fixed right-2 z-50 bottom-3 md:hidden  mt-5 ">
         <Cart />
       </div>
       <div className="h-fit relative w-full overflow-hidden bg-slate-900  py-10">
