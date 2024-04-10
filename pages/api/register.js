@@ -12,8 +12,8 @@ export default async function handler(req, res) {
   switch (method) {
     case "GET":
       try {
-        const productos = await RegisterDublin.find({}).sort({ createdAt: -1 });
-        res.status(200).json({ success: true, data: productos });
+        const registers = await RegisterDublin.find({}).sort({ createdAt: -1 });
+        res.status(200).json({ success: true, data: registers });
       } catch (error) {
         res.status(400).json({ success: false, error: error.message });
       }
