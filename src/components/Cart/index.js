@@ -105,19 +105,22 @@ export const Cart = () => {
                       {producto.quantity}
                     </TableCell>
                     <TableCell className="">
+                      <div className="flex">
                       <Button
-                        variant="outline"
+                        variant="outline" className='mx-1'
                         onClick={() => incrementarCantidad(producto.title)}
                       >
                         +
                       </Button>
                       <Button
-                        variant="outline"
+                        variant="outline" className='mx-1'
                         onClick={() => decrementarCantidad(producto.title)}
                       >
                         -
                       </Button>
+                      </div>
                       <Button
+                      className='mt-2'
                         variant="outline"
                         onClick={() => removerProducto(producto.title)}
                       >
