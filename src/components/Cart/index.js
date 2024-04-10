@@ -48,7 +48,7 @@ export const Cart = () => {
   );
 
   return (
-    <AlertDialog className='z-50'>
+    <AlertDialog className="z-50">
       <AlertDialogTrigger asChild>
         <Button variant="icon" className="bg-[#047857]">
           <span className="bg-sky-50 border border-black px-2 text-black  absolute bottom-8 right-10 text-md font-geist rounded-full">
@@ -126,11 +126,19 @@ export const Cart = () => {
                     </TableCell>
                   </TableRow>
                 ))}
-                <TableFooter className="mt-5">
-                  Total: {formatPrice(montoTotal)}
-                </TableFooter>
               </TableBody>
             </Table>
+            <div className="mt-2">
+              <p className="font-geist tracking-tighter">
+                Total por transferencia: <span className="font-bold ml-1 my-1">{formatPrice(montoTotal)}</span>
+              </p>
+              <p className="font-geist tracking-tighter">
+                Total con tarjeta:{" "}
+                <span className="font-bold ml-1 my-1">
+                  {formatPrice((montoTotal + montoTotal * 0.2).toFixed(2))}
+                </span>
+              </p>
+            </div>
             <div className="mt-5">
               <CheckoutForm products={productos} total={montoTotal} />
             </div>

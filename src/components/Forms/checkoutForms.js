@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import useForms from "@/hook/useForms";
 import { useRouter } from "next/navigation";
+import { formatPrice } from "@/lib/utils";
 export const CheckoutForm = ({ total, products }) => {
   const { sendAdresss, sendPayment, setTotal, setProducts } = useForms();
   const { push } = useRouter();
@@ -48,7 +49,7 @@ export const CheckoutForm = ({ total, products }) => {
           </div>
           <div>
             <Button variant="outline" onClick={sendMessage}>
-              Quiero pagar por transferencia
+              Quiero pagar {formatPrice(total)} por transferencia
             </Button>
           </div>
           <AlertDialogFooter>
