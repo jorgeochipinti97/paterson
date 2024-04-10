@@ -67,8 +67,10 @@ export const PaymentForm = ({ onSubmit, total }) => {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Categoria</SelectLabel>
-              {tarjetas.map((e,index) => (
-                <SelectItem key={index} value={`${e.value}`}>{e.name}</SelectItem>
+              {tarjetas.map((e, index) => (
+                <SelectItem key={index} value={`${e.value}`}>
+                  {e.name}
+                </SelectItem>
               ))}
             </SelectGroup>
           </SelectContent>
@@ -86,12 +88,14 @@ export const PaymentForm = ({ onSubmit, total }) => {
             <SelectGroup>
               <SelectLabel>Categoria</SelectLabel>
 
-              <SelectItem value="1">1 cuota de ${total.toFixed(2)}</SelectItem>
+              <SelectItem value="1">
+                1 cuota de ${(total + total * 0.2).toFixed(2)} | +20%
+              </SelectItem>
               <SelectItem value="2">
-                2 cuotas de ${(total + total * 0.22).toFixed(2)}
+                2 cuotas de ${(total + total * 0.22).toFixed(2)} | +22%
               </SelectItem>
               <SelectItem value="3">
-                3 cuotas de ${(total + total * 0.25).toFixed(2)}
+                3 cuotas de ${(total + total * 0.25).toFixed(2)} | +25%
               </SelectItem>
             </SelectGroup>
           </SelectContent>

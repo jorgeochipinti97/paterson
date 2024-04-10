@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 
 export const ProductForm = ({ product }) => {
   const fileTypes = ["JPG", "PNG", "GIF", "JPEG", "AVIF", "WEBP"];
-  const [images_,setImages_] =useState([])
+  const [images_, setImages_] = useState([]);
   useEffect(() => {
     product && setValue("images", product.images);
     product && setImages_(product.images);
@@ -49,12 +49,17 @@ export const ProductForm = ({ product }) => {
         : [data.secure_url];
 
       setValue("images", updatedImages);
-      setImages_( updatedImages);
+      setImages_(updatedImages);
     } catch (er) {
       console.log(er);
     }
   };
 
+  const deleteImage = (img) => {
+    const newImages = images_.filter((e) => e != img);
+    setImages_(newImages);
+    setValue("images", newImages);
+  };
   const {
     register,
     handleSubmit,
@@ -90,9 +95,16 @@ export const ProductForm = ({ product }) => {
       </section>
       <div className="flex justify-start flex-wrap">
         {images_ &&
-          images_.map((e,index) => (
+          images_.map((e, index) => (
             <div className="mx-2" key={index}>
-              <img src={e}  className="w-[50px]"/>
+              <img src={e} className="w-[50px]" />
+              <Button
+                variant="destructive"
+                onClick={() => deleteImage(e)}
+                size="sm"
+              >
+                Eliminar
+              </Button>
             </div>
           ))}
       </div>
@@ -117,9 +129,7 @@ export const ProductForm = ({ product }) => {
           {...register("description")}
         />
         <section className="my-2">
-          <Select
-            onValueChange={(e) => setValue("category", e)}
-          >
+          <Select onValueChange={(e) => setValue("category", e)}>
             <SelectTrigger className="w-[300px]">
               <SelectValue placeholder="Selecciona una categoria" />
             </SelectTrigger>
@@ -140,10 +150,7 @@ export const ProductForm = ({ product }) => {
         </section>
 
         <section>
-          <Select
-            onValueChange={(e) => setValue("subcategory", e)}
-
-          >
+          <Select onValueChange={(e) => setValue("subcategory", e)}>
             {" "}
             <SelectTrigger className="w-[300px]">
               <SelectValue placeholder="Selecciona una subcategoria" />

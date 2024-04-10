@@ -11,9 +11,10 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import useForms from "@/hook/useForms";
+import { useRouter } from "next/navigation";
 export const CheckoutForm = ({ total, products }) => {
   const { sendAdresss, sendPayment, setTotal, setProducts } = useForms();
-
+  const { push } = useRouter();
   useEffect(() => {
     setTotal(total);
   }, [total]);
@@ -21,7 +22,14 @@ export const CheckoutForm = ({ total, products }) => {
   useEffect(() => {
     setProducts(products);
   }, [products]);
-
+  const sendMessage = () => {
+    const mensaje = `Hola! Queria consultar para pagar ${products.map(
+      (e) => `${e.title} `
+    )} por transferencia`;
+    const mensajeUrlEncoded = encodeURIComponent(mensaje);
+    const enlaceWaLink = `https://wa.me/5491122984742?text=${mensajeUrlEncoded}`;
+    push(enlaceWaLink);
+  };
   return (
     <div className="">
       <AlertDialog>
@@ -37,6 +45,11 @@ export const CheckoutForm = ({ total, products }) => {
             style={{ opacity: 0, display: "none" }}
           >
             <PaymentForm onSubmit={sendPayment} total={total} />
+          </div>
+          <div>
+            <Button variant="outline" onClick={sendMessage}>
+              Quiero pagar por transferencia
+            </Button>
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Volver</AlertDialogCancel>

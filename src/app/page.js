@@ -6,13 +6,13 @@ import useProducts from "@/hook/useProducts";
 import { Cart } from "@/components/Cart";
 import { useEffect } from "react";
 import gsap, { Power1 } from "gsap";
-import { useAlert } from "@/hook/useAlert";
-import { AlertComponent } from "@/components/ui/AlertComponent";
+
+
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import { RegisterForm } from "@/components/Forms/registerForm";
 
 export default function Home() {
   const { products } = useProducts();
-  const { alertProps } = useAlert();
 
   useEffect(() => {
     products &&
@@ -45,10 +45,11 @@ export default function Home() {
       });
   }, [products]);
   return (
-    <div>
+    <div className=" bg-slate-900">
+      <Navbar />
       <Alert
         style={{ opacity: 0, display: "none" }}
-        className="alerta fixed bottom-2 right-2 z-50 w-fit p-5"
+        className="alerta fixed bottom-2 left-2 z-50 w-fit p-5"
       >
         <svg
           width={25}
@@ -68,7 +69,7 @@ export default function Home() {
       <div className="fixed right-2 z-50 bottom-3 md:hidden  mt-5 ">
         <Cart />
       </div>
-      <div className="h-fit relative w-full overflow-hidden bg-slate-900  py-10">
+      <div className="h-fit relative w-full overflow-hidden  py-10">
         <p className=" text-4xl  md:hidden uppercase textGradient  font-extrabold text-center tracking-tighter font-geist ">
           Dublin Store
         </p>
@@ -112,8 +113,19 @@ export default function Home() {
           </div>
         </section>
       </div>
-
-      <Navbar />
+      <div className="flex justify-start flex-col items-center mt-10 pb-10">
+        <p className="text-center font-bold text-4xl mb-5 md:text-7xl text-white tracking-tighter font-geist">
+          DOMINÁ EL ARTE DE IMPORTAR
+        </p>
+        <img
+          src="/guia.png"
+          className="w-10/12 md:w-4/12 mt-0 md:mt-10 rounded-xl shadowBoxLow"
+        />
+        <p className="text-center font-semibold mt-10 text-4xl md:text-2xl text-white tracking-tighter font-geist">
+          ¡Registrate y descarga Tu Guía Gratuita Ahora!
+        </p>
+        <RegisterForm />
+      </div>
     </div>
   );
 }
