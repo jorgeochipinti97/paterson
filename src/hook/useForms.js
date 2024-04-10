@@ -89,8 +89,8 @@ function useForms() {
       token: token,
       payment_method_id: paymentForm.card,
       bin: "450799",
-      amount: 2900,
-      //   amount: parseInt(amountToPay),
+      // amount: 2900,
+        amount: parseInt(amountToPay),
       currency: "ARS",
       site_id: "92109151",
       establishment_name: "Dublin Store",
@@ -116,7 +116,7 @@ function useForms() {
         },
         purchase_totals: {
           currency: "ARS",
-          amount: 2900,
+          amount: amountToPay,
         },
         customer_in_site: {
           days_in_site: 243,

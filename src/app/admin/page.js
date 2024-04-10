@@ -1,4 +1,5 @@
 import { ProductForm } from "@/components/Forms/productForm";
+import { TableGuide } from "@/components/Tables/guiaTable";
 import TableOrders from "@/components/Tables/ordersTable";
 import { TableProducts } from "@/components/Tables/productTable";
 
@@ -13,6 +14,7 @@ const Page = () => {
             <TabsTrigger value="account">Crear Producto</TabsTrigger>
             <TabsTrigger value="products">Productos</TabsTrigger>
             <TabsTrigger value="orders">Ordenes</TabsTrigger>
+            <TabsTrigger value="guia">Guia</TabsTrigger>
           </TabsList>
           <TabsContent value="account">
             <ProductForm />
@@ -22,6 +24,9 @@ const Page = () => {
           </TabsContent>
           <TabsContent value="orders">
             <TableOrders />
+          </TabsContent>
+          <TabsContent value="guia">
+<TableGuide/>
           </TabsContent>
         </Tabs>
       </div>
