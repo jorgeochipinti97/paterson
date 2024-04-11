@@ -152,20 +152,20 @@ export const Cart = () => {
                 ))}
               </TableBody>
             </Table>
-            <div className="mt-2">
-              <p className="font-geist tracking-tighter my-2">
+            <div className="mt-2 flex flex-col items-start">
+              <p className="font-geist tracking-tighter my-1">
                 Total por transferencia:{" "}
                 <span className="font-bold ml-1 my-1">
                   {formatPrice(montoTotal)}
                 </span>
               </p>
-              <p className="font-geist tracking-tighter my-2">
+              <p className="font-geist tracking-tighter my-1">
                 Total con MercadoPago:{" "}
                 <span className="font-bold ml-1 my-1">
                   {formatPrice(totalMercadoPago)}
                 </span>
               </p>
-              <p className="font-geist tracking-tighter my-2">
+              <p className="font-geist tracking-tighter my-1">
                 Total con Tarjeta:{" "}
                 <span className="font-bold ml-1 my-1">
                   {formatPrice(totalPayway)}
