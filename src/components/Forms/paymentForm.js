@@ -28,6 +28,8 @@ export const PaymentForm = ({ onSubmit, total }) => {
     { name: "Cabal Crédito", value: 63 },
   ];
 
+
+  
   const {
     register,
     handleSubmit,

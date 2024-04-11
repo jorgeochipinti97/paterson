@@ -2,13 +2,14 @@
 import axios from "axios";
 import gsap, { Power1 } from "gsap";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 function useForms() {
   const [addressForm, setAddressForm] = useState({});
   const { push } = useRouter();
   const [total, setTotal] = useState(false);
+  const [amountToPay, setAmountToPay] = useState(false);
   const [products, setProducts] = useState(false);
 
   const sendAdresss = (forms) => {
@@ -35,8 +36,6 @@ function useForms() {
 
   const sendPayment = (paymentForm) => {
     generateToken(paymentForm, addressForm);
-    console.log(addressForm);
-    console.log(paymentForm);
   };
 
   const generateToken = async (paymentForm, addressForm) => {
@@ -75,10 +74,29 @@ function useForms() {
       alert("algo ha salido mal");
     }
   };
+  const calculateTotalInCents = (updatedProducts) => {
+    // Calcula el total considerando el precio ya ajustado y la cantidad
+    const totalInCents = updatedProducts.reduce((acc, product) => {
+      return acc + product.price * product.quantity * 100;
+    }, 0);
+
+    return totalInCents;
+  };
+
+  useEffect(() => {
+    console.log(amountToPay);
+  }, [amountToPay]);
 
   const getPayment = async (token, addressForm, paymentForm) => {
     const apikey = "f59af5c9cc694603aaf401a684e61d53";
-    const amountToPay = total * 100;
+
+    const updatedProducts = products.map((product) => ({
+      ...product,
+      price: product.price * 1.31, // Incrementa el precio en un 31%
+      total_amount: product.price * 1.31 * product.quantity, // Calcula el monto total por producto
+    }));
+    const totalAmountInCents = calculateTotalInCents(updatedProducts);
+    console.log(updatedProducts);
     const datos = {
       customer: {
         id: addressForm.firstName,
@@ -90,7 +108,7 @@ function useForms() {
       payment_method_id: paymentForm.card,
       bin: "450799",
       // amount: 2900,
-        amount: parseInt(amountToPay),
+      amount: totalAmountInCents,
       currency: "ARS",
       site_id: "92109151",
       establishment_name: "Dublin Store",
@@ -116,7 +134,7 @@ function useForms() {
         },
         purchase_totals: {
           currency: "ARS",
-          amount: amountToPay,
+          amount: totalAmountInCents,
         },
         customer_in_site: {
           days_in_site: 243,
@@ -136,7 +154,7 @@ function useForms() {
             last_name: addressForm.lastName,
             phone_number: addressForm.phone,
             phone_number: addressForm.phone,
-            postal_code: "1427",
+            postal_code: addressForm.zipCode,
             state: "BA",
             street1: addressForm.address,
             street2: "",
@@ -146,13 +164,14 @@ function useForms() {
           tax_voucher_required: true,
           customer_loyality_number: "123232",
           coupon_code: "",
-          items: products.map((product) => ({
-            code: product._id,
+          items: updatedProducts.map((product) => ({
+            productCode: `${uuidv4()}`,
+            code: `${uuidv4()}`,
             description: "",
             name: product.title,
-            sku: uuidv4(),
             total_amount: product.price,
-            quantity: 1,
+            quantity: product.quantity,
+            sku: product.title,
             unit_price: product.price,
           })),
         },

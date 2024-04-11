@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { calcularComisionMercadoPago, formatPrice } from "@/lib/utils";
 import axios from "axios";
 import { initMercadoPago } from "@mercadopago/sdk-react";
+import { Paywayform } from "./paywayForm";
 
 export const CheckoutForm = ({ total, products }) => {
   const { sendAdresss, sendPayment, setTotal, setProducts } = useForms();
@@ -22,7 +23,6 @@ export const CheckoutForm = ({ total, products }) => {
   useEffect(() => {
     setTotal(total);
   }, [total]);
-
 
   const mensaje = `Hola! recien compre estos productos ${products.map(
     (e) => `${e.title}`
@@ -97,14 +97,8 @@ export const CheckoutForm = ({ total, products }) => {
           <Button>Comprar ahora</Button>
         </AlertDialogTrigger>
         <AlertDialogContent className="">
-          <div className="addressForm w-full">
-            <AddressForm onSubmit={sendAdresss} />
-          </div>
-          <div
-            className="paymentForm w-full"
-            style={{ opacity: 0, display: "none" }}
-          >
-            <PaymentForm onSubmit={sendPayment} total={total} />
+          <div>
+            <Paywayform total={total} sendAdresss={sendAdresss} sendPayment={sendPayment} />
           </div>
           <div>
             <Button
@@ -118,7 +112,15 @@ export const CheckoutForm = ({ total, products }) => {
           </div>
           <div>
             <Button variant="outline" onClick={sendMessage}>
-              Quiero pagar {formatPrice(total)} por transferencia
+            <svg 
+            width={20}
+            className="mr-2"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <g>
+        <path d="M14.75 2.5H1.25A1.2 1.2 0 000 3.64v8.72a1.2 1.2 0 001.25 1.14h13.5A1.2 1.2 0 0016 12.36V3.64a1.2 1.2 0 00-1.25-1.14zm0 9.75H1.25v-8.5h13.5z"></path>
+        <path d="M7 8.62h2a.34.34 0 01.33.38.33.33 0 01-.33.29H7.08A.33.33 0 016.75 9H5.49a1.58 1.58 0 001.58 1.54h.31v1.26h1.24v-1.26H9A1.58 1.58 0 0010.56 9a1.51 1.51 0 00-.34-1A1.59 1.59 0 009 7.38H7A.34.34 0 016.69 7a.13.13 0 01.01 0 .34.34 0 01.3-.3h1.94a.34.34 0 01.33.3h1.25a1.59 1.59 0 00-1.58-1.55h-.32V4.2H7.37v1.25H7A1.6 1.6 0 005.44 7a1.55 1.55 0 00.35 1A1.59 1.59 0 007 8.62z"></path>
+      </g>
+    </svg>   Quiero pagar {formatPrice(total)} por transferencia
             </Button>
           </div>
           <AlertDialogFooter>
