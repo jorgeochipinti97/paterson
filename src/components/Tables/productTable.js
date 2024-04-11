@@ -35,8 +35,11 @@ export const TableProducts = () => {
 
   const onDelete = async (_id) => {
     const response = await axios.delete(`/api/products?_id=${_id}`);
-console.log(response)
+    console.log(response);
   };
+
+
+
   return (
     <Table>
       <TableCaption>Lista de productos</TableCaption>
@@ -52,7 +55,7 @@ console.log(response)
       </TableHeader>
       <TableBody>
         {products &&
-          products.map((e,index) => (
+          products.map((e, index) => (
             <TableRow key={index}>
               <TableCell className="font-medium">
                 <img src={`${e.images[0]}`} className="w-[100px] rounded-xl" />
