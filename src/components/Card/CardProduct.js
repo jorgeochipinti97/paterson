@@ -45,7 +45,16 @@ export const CardProduct = ({ product }) => {
 
         <div className="flex flex-col items-center justify-center mt-5">
           <div className="my-1">
-            <CheckoutForm total={product.discountPrice} products={[product]} />
+            <CheckoutForm
+              total={product.discountPrice}
+              products={[
+                {
+                  title: product.title,
+                  price: product.price,
+                  quantity: 1,
+                },
+              ]}
+            />
           </div>
           <div className="my-1">
             <Button

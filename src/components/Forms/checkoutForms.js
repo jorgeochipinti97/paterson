@@ -23,6 +23,7 @@ export const CheckoutForm = ({ total, products }) => {
     setTotal(total);
   }, [total]);
 
+
   const mensaje = `Hola! recien compre estos productos ${products.map(
     (e) => `${e.title}`
   )}  por mercadopago, `;
