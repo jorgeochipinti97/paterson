@@ -6,7 +6,7 @@ import useProducts from "@/hook/useProducts";
 import { Cart } from "@/components/Cart";
 import { useEffect } from "react";
 import gsap, { Power1 } from "gsap";
-
+import Marquee from "react-fast-marquee";
 
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { RegisterForm } from "@/components/Forms/registerForm";
@@ -96,6 +96,7 @@ export default function Home() {
             loop
           />
         </div>
+
         <section>
           <p
             style={{ opacity: 0.5 }}
@@ -126,6 +127,20 @@ export default function Home() {
         </p>
         <RegisterForm />
       </div>
+      <Marquee className="bg-white mt-5" autoFill>
+        <div className="flex justify-center mx-5">
+          <img src="/am.png" className="w-[100px] md:w-[200px]" />
+        </div>
+        <div className="flex justify-center mx-5">
+          <img src="/merca.png" className="w-[100px] md:w-[200px]" />
+        </div>
+        <div className="flex justify-center mx-5">
+          <img src="/payway.png" className="w-[100px] md:w-[200px]" />
+        </div>
+        <div className="flex justify-center mx-5">
+          <img src="/master.png" className="w-[100px] md:w-[200px]" />
+        </div>
+      </Marquee>
     </div>
   );
 }
