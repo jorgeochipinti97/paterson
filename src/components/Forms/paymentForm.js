@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { formatPrice } from "@/lib/utils";
 
 export const PaymentForm = ({ onSubmit, total }) => {
   const [card, setCard] = useState("");
@@ -28,8 +29,6 @@ export const PaymentForm = ({ onSubmit, total }) => {
     { name: "Cabal Crédito", value: 63 },
   ];
 
-
-  
   const {
     register,
     handleSubmit,
@@ -91,13 +90,13 @@ export const PaymentForm = ({ onSubmit, total }) => {
               <SelectLabel>Categoria</SelectLabel>
 
               <SelectItem value="1">
-                1 cuota de ${(total + total * 0.2).toFixed(2)} | +20%
+                1 cuota de ${formatPrice(total + total * 0.2)} | +20%
               </SelectItem>
               <SelectItem value="2">
-                2 cuotas de ${(total + total * 0.22).toFixed(2)} | +22%
+                2 cuotas de ${formatPrice(total + total * 0.22)} | +22%
               </SelectItem>
               <SelectItem value="3">
-                3 cuotas de ${(total + total * 0.25).toFixed(2)} | +25%
+                3 cuotas de ${formatPrice(total + total * 0.25)} | +25%
               </SelectItem>
             </SelectGroup>
           </SelectContent>

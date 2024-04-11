@@ -9,7 +9,7 @@ function useForms() {
   const [addressForm, setAddressForm] = useState({});
   const { push } = useRouter();
   const [total, setTotal] = useState(false);
-  const [amountToPay, setAmountToPay] = useState(false);
+
   const [products, setProducts] = useState(false);
 
   const sendAdresss = (forms) => {
@@ -83,18 +83,14 @@ function useForms() {
     return totalInCents;
   };
 
-  useEffect(() => {
-    console.log(amountToPay);
-  }, [amountToPay]);
-
   const getPayment = async (token, addressForm, paymentForm) => {
     const apikey = "f59af5c9cc694603aaf401a684e61d53";
 
     const updatedProducts = products.map((product) => ({
       ...product,
-      price: product.price * 1.31, // Incrementa el precio en un 31%
-      total_amount: product.price * 1.31 * product.quantity, // Calcula el monto total por producto
+      price: product.price * 1.43, // Incrementa el precio en un 31%
     }));
+
     const totalAmountInCents = calculateTotalInCents(updatedProducts);
     console.log(updatedProducts);
     const datos = {
@@ -108,7 +104,10 @@ function useForms() {
       payment_method_id: paymentForm.card,
       bin: "450799",
       // amount: 2900,
-      amount: totalAmountInCents,
+      amount:
+        paymentForm.installments == 1
+          ? totalAmountInCents
+          : totalAmountInCents * 0.24,
       currency: "ARS",
       site_id: "92109151",
       establishment_name: "Dublin Store",

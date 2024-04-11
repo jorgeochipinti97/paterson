@@ -98,7 +98,7 @@ export const CheckoutForm = ({ total, products }) => {
         </AlertDialogTrigger>
         <AlertDialogContent className="">
           <div>
-            <Paywayform total={total} sendAdresss={sendAdresss} sendPayment={sendPayment} />
+            <Paywayform total={total} sendAdresss={sendAdresss} sendPayment={sendPayment}  products={products}/>
           </div>
           <div>
             <Button

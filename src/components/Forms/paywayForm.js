@@ -10,11 +10,27 @@ import { Button } from "../ui/button";
 import { AddressForm } from "./addressForm";
 import { PaymentForm } from "./paymentForm";
 
-export const Paywayform = ({ sendAdresss, sendPayment, total }) => {
+export const Paywayform = ({ sendAdresss, sendPayment, total, products }) => {
+  const updatedProducts = products.map((product) => ({
+    ...product,
+    price: product.price * 1.43, // Incrementa el precio en un 31%
+    total_amount: product.price * 1.43 * product.quantity, // Calcula el monto total por producto
+  }));
+
+  const calculateTotalInCents = (updatedProducts) => {
+    // Calcula el total considerando el precio ya ajustado y la cantidad
+    const totalInCents = updatedProducts.reduce((acc, product) => {
+      return acc + product.price * product.quantity;
+    }, 0);
+
+    return totalInCents;
+  };
+  const totalAmountInCents = calculateTotalInCents(updatedProducts);
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant='outline'>
+        <Button variant="outline">
           <svg
             width={20}
             className="mr-2"
@@ -43,7 +59,7 @@ export const Paywayform = ({ sendAdresss, sendPayment, total }) => {
             className="paymentForm w-full"
             style={{ opacity: 0, display: "none" }}
           >
-            <PaymentForm onSubmit={sendPayment} total={total} />
+            <PaymentForm onSubmit={sendPayment} total={totalAmountInCents} />
           </div>
         </div>
         <AlertDialogFooter>

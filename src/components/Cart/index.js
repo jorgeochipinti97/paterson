@@ -25,7 +25,7 @@ import {
 import useCartStore from "@/hook/useCartStore";
 import { Button } from "../ui/button";
 import { CheckoutForm } from "../Forms/checkoutForms";
-import { formatPrice } from "@/lib/utils";
+import { calcularComisionMercadoPago, formatPrice } from "@/lib/utils";
 
 export const Cart = () => {
   const productos = useCartStore((state) => state.productos);
@@ -45,6 +45,25 @@ export const Cart = () => {
 
   const total = useCartStore((state) =>
     state.productos.reduce((acc, producto) => acc + producto.quantity, 0)
+  );
+
+  const itemsMercadopago = productos.map((product) => ({
+    title: product.title, // Nombre del producto
+    quantity: product.quantity, // Cantidad fijada a 1 en este ejemplo
+    unit_price: calcularComisionMercadoPago(product.price), // Aplica la comisión de MercadoPago
+  }));
+  const itemsPayway = productos.map((product) => ({
+    ...product,
+    price: product.price * 1.43 * product.quantity, 
+  }));
+
+  const totalPayway = itemsPayway.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  const totalMercadoPago = itemsMercadopago.reduce(
+    (acc, item) => acc + item.unit_price * item.quantity,
+    0
   );
 
   return (
@@ -106,21 +125,23 @@ export const Cart = () => {
                     </TableCell>
                     <TableCell className="">
                       <div className="flex">
-                      <Button
-                        variant="outline" className='mx-1'
-                        onClick={() => incrementarCantidad(producto.title)}
-                      >
-                        +
-                      </Button>
-                      <Button
-                        variant="outline" className='mx-1'
-                        onClick={() => decrementarCantidad(producto.title)}
-                      >
-                        -
-                      </Button>
+                        <Button
+                          variant="outline"
+                          className="mx-1"
+                          onClick={() => incrementarCantidad(producto.title)}
+                        >
+                          +
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="mx-1"
+                          onClick={() => decrementarCantidad(producto.title)}
+                        >
+                          -
+                        </Button>
                       </div>
                       <Button
-                      className='mt-2'
+                        className="mt-2"
                         variant="outline"
                         onClick={() => removerProducto(producto.title)}
                       >
@@ -132,13 +153,22 @@ export const Cart = () => {
               </TableBody>
             </Table>
             <div className="mt-2">
-              <p className="font-geist tracking-tighter">
-                Total por transferencia: <span className="font-bold ml-1 my-1">{formatPrice(montoTotal)}</span>
-              </p>
-              <p className="font-geist tracking-tighter">
-                Total con tarjeta:{" "}
+              <p className="font-geist tracking-tighter my-2">
+                Total por transferencia:{" "}
                 <span className="font-bold ml-1 my-1">
-                  {formatPrice((montoTotal + montoTotal * 0.2).toFixed(2))}
+                  {formatPrice(montoTotal)}
+                </span>
+              </p>
+              <p className="font-geist tracking-tighter my-2">
+                Total con MercadoPago:{" "}
+                <span className="font-bold ml-1 my-1">
+                  {formatPrice(totalMercadoPago)}
+                </span>
+              </p>
+              <p className="font-geist tracking-tighter my-2">
+                Total con Tarjeta:{" "}
+                <span className="font-bold ml-1 my-1">
+                  {formatPrice(totalPayway)}
                 </span>
               </p>
             </div>
