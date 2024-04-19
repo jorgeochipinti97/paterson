@@ -70,10 +70,15 @@ export default function Home() {
         <Cart />
       </div>
       <div className="h-fit relative w-full overflow-hidden  py-10">
-
-
         <div className="flex justify-center mt-10 ">
-          <video src="/video.mp4" className=" w-9/12 md:w-3/12 rounded-xl shadowBoxLow" autoPlay loop playsInline muted />
+          <video
+            src="/video.mp4"
+            className=" w-9/12 md:w-3/12 rounded-xl shadowBoxLow"
+            autoPlay
+            loop
+            playsInline
+            muted
+          />
         </div>
 
         <section>
@@ -81,7 +86,7 @@ export default function Home() {
             style={{ opacity: 0.5 }}
             className="text-three text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20"
           >
-            Oferta mensual
+            NEW DROP FW24'
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 mt-10 w-screen">
             {products &&
@@ -94,15 +99,15 @@ export default function Home() {
         </section>
       </div>
 
-      <Marquee className="bg-white mt-5" autoFill>
+      <Marquee className="bg-black mt-5" autoFill>
         <div className="flex justify-center mx-5">
-          <img src="/visa.png" className="w-[100px] md:w-[200px]" />
+          <img src="/logo.png" className="w-[100px] md:w-[200px]" />
         </div>
         <div className="flex justify-center mx-5">
-          <img src="/merca.png" className="w-[100px] md:w-[200px]" />
+          <img src="/logo.png" className="w-[100px] md:w-[200px]" />
         </div>
         <div className="flex justify-center mx-5">
-          <img src="/master.png" className="w-[100px] md:w-[200px]" />
+          <img src="/logo.png" className="w-[100px] md:w-[200px]" />
         </div>
       </Marquee>
     </div>

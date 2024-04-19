@@ -54,7 +54,7 @@ export const Cart = () => {
   }));
   const itemsPayway = productos.map((product) => ({
     ...product,
-    price: product.price * 1.43 * product.quantity, 
+    price: product.price * 1.43 * product.quantity,
   }));
 
   const totalPayway = itemsPayway.reduce(
@@ -114,8 +114,8 @@ export const Cart = () => {
                 {productos.map((producto) => (
                   <TableRow key={producto.title}>
                     <TableCell className="text-xs">
-                      {producto.title}
-                      {producto.personalization}
+                      {producto.title} - {producto.size}
+
                     </TableCell>
                     <TableCell className="text-center">
                       {formatPrice(producto.price)}
@@ -154,26 +154,14 @@ export const Cart = () => {
             </Table>
             <div className="mt-2 flex flex-col items-start">
               <p className="font-geist tracking-tighter my-1">
-                Total por transferencia:{" "}
-                <span className="font-bold ml-1 my-1">
-                  {formatPrice(montoTotal)}
-                </span>
-              </p>
-              <p className="font-geist tracking-tighter my-1">
                 Total con MercadoPago:{" "}
                 <span className="font-bold ml-1 my-1">
                   {formatPrice(totalMercadoPago)}
                 </span>
               </p>
-              <p className="font-geist tracking-tighter my-1">
-                Total con Tarjeta:{" "}
-                <span className="font-bold ml-1 my-1">
-                  {formatPrice(totalPayway)}
-                </span>
-              </p>
             </div>
             <div className="mt-5">
-              <CheckoutForm products={productos} total={montoTotal} />
+              <CheckoutForm products={productos} total={montoTotal}  size={'m'}/>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>

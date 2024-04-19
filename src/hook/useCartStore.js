@@ -6,45 +6,46 @@ const useCartStore = create((set) => ({
   productos: [],
   agregarProducto: (productoNuevo) =>
     set((state) => {
+      // Encuentra si el producto, con el mismo título y talle, ya está en el carrito
       const productoExistente = state.productos.find(
-        (producto) => producto.title === productoNuevo.title
+        (producto) => producto.title === productoNuevo.title && producto.size === productoNuevo.size
       );
       if (productoExistente) {
-        // Si el producto ya está en el carrito, aumentamos la cantidad
+        // Si el producto ya está en el carrito y es del mismo talle, aumenta la cantidad
         return {
           productos: state.productos.map((producto) =>
-            producto.title === productoNuevo.title
+            producto.title === productoNuevo.title && producto.size === productoNuevo.size
               ? { ...producto, quantity: producto.quantity + 1 }
               : producto
           ),
         };
       } else {
-        // Si el producto no está en el carrito, lo agregamos con cantidad 1
+        // Si el producto no está en el carrito o es de diferente talle, lo agregamos con cantidad 1
         return {
           productos: [...state.productos, { ...productoNuevo, quantity: 1 }],
         };
       }
     }),
-  removerProducto: (titleProducto) =>
+  removerProducto: (titleProducto, sizeProducto) =>
     set((state) => ({
       productos: state.productos.filter(
-        (producto) => producto.title !== titleProducto
+        (producto) => producto.title !== titleProducto || producto.size !== sizeProducto
       ),
     })),
-  decrementarCantidad: (titleProducto) =>
+  decrementarCantidad: (titleProducto, sizeProducto) =>
     set((state) => ({
       productos: state.productos
         .map((producto) =>
-          producto.title === titleProducto && producto.quantity > 1
+          producto.title === titleProducto && producto.size === sizeProducto && producto.quantity > 1
             ? { ...producto, quantity: producto.quantity - 1 }
             : producto
         )
-        .filter((producto) => producto.quantity > 0), // Esto asegura no mantener productos con cantidad 0
+        .filter((producto) => producto.quantity > 0),
     })),
-  incrementarCantidad: (titleProducto) =>
+  incrementarCantidad: (titleProducto, sizeProducto) =>
     set((state) => ({
       productos: state.productos.map((producto) =>
-        producto.title === titleProducto
+        producto.title === titleProducto && producto.size === sizeProducto
           ? { ...producto, quantity: producto.quantity + 1 }
           : producto
       ),
@@ -52,7 +53,6 @@ const useCartStore = create((set) => ({
   limpiarCarrito: () => set(() => ({ productos: [] })),
   cantidadTotal: () =>
     set((state) => ({
-      // Calcula la cantidad total de productos en el carrito
       total: state.productos.reduce(
         (acc, producto) => acc + producto.quantity,
         0
@@ -60,7 +60,6 @@ const useCartStore = create((set) => ({
     })),
   totalPrecios: () =>
     set((state) => ({
-      // Calcula el total de precios en el carrito
       totalPrecio: state.productos.reduce(
         (acc, producto) => acc + producto.quantity * producto.price,
         0
