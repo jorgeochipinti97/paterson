@@ -45,7 +45,7 @@ export default function Home() {
       });
   }, [products]);
   return (
-    <div className=" bg-slate-900">
+    <div className=" bg-slate-950 min-h-screen">
       <Navbar />
       <Alert
         style={{ opacity: 0, display: "none" }}
@@ -70,31 +70,10 @@ export default function Home() {
         <Cart />
       </div>
       <div className="h-fit relative w-full overflow-hidden  py-10">
-        <p className=" text-4xl  md:hidden uppercase textGradient  font-extrabold text-center tracking-tighter font-geist ">
-          Dublin Store
-        </p>
-        <p
-          style={{ opacity: 0.5 }}
-          className=" text-one text-green-100 text-3xl md:text-5xl uppercase  font-extrabold text-center tracking-tighter font-geist mt-10 "
-        >
-          Tu socio comercial
-        </p>
-        <p
-          style={{ opacity: 0.5 }}
-          className=" text-two  text-xl uppercase text-teal-100  font-light text-center tracking-tighter font-mono mt-2"
-        >
-          Importaciones tecnológicas.
-        </p>
-        <div className="flex justify-center ">
-          <video
-            src="/video.mp4"
-            className="h-[60vh] video rounded-xl mt-5 shadowBoxLow"
-            style={{ opacity: 0 }}
-            autoPlay
-            playsInline
-            muted
-            loop
-          />
+
+
+        <div className="flex justify-center mt-10 ">
+          <video src="/video.mp4" className=" w-9/12 md:w-3/12 rounded-xl shadowBoxLow" autoPlay loop playsInline muted />
         </div>
 
         <section>
@@ -114,28 +93,13 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <div className="flex justify-start flex-col items-center mt-10 pb-10">
-        <p className="text-center font-bold text-4xl mb-5 md:text-7xl text-white tracking-tighter font-geist">
-          DOMINÁ EL ARTE DE IMPORTAR
-        </p>
-        <img
-          src="/guia.png"
-          className="w-10/12 md:w-4/12 mt-0 md:mt-10 rounded-xl shadowBoxLow"
-        />
-        <p className="text-center font-semibold mt-10 text-4xl md:text-2xl text-white tracking-tighter font-geist">
-          ¡Registrate y descarga Tu Guía Gratuita Ahora!
-        </p>
-        <RegisterForm />
-      </div>
+
       <Marquee className="bg-white mt-5" autoFill>
         <div className="flex justify-center mx-5">
-          <img src="/am.png" className="w-[100px] md:w-[200px]" />
+          <img src="/visa.png" className="w-[100px] md:w-[200px]" />
         </div>
         <div className="flex justify-center mx-5">
           <img src="/merca.png" className="w-[100px] md:w-[200px]" />
-        </div>
-        <div className="flex justify-center mx-5">
-          <img src="/payway.png" className="w-[100px] md:w-[200px]" />
         </div>
         <div className="flex justify-center mx-5">
           <img src="/master.png" className="w-[100px] md:w-[200px]" />

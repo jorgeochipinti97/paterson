@@ -4,19 +4,26 @@ const ProductSchema = new mongoose.Schema({
   title: { type: String, required: true },
   tags: [{ type: String }],
   images: [{ type: String, required: true }],
-  slug: { type: String, },
+  slug: { type: String },
   description: { type: String },
   price: { type: Number, required: true },
-  discountPrice: { type: Number,  },
+  discountPrice: { type: Number },
   category: { type: String, required: true },
-  subcategory: { type: String}, 
+  subcategory: { type: String },
   productosRelacionados: [{ type: String }],
   tracking: { type: String },
   sku: { type: String },
-  stock: { type: Number  }
+  stock: { type: Number },
+  sizes: [
+    {
+      size: { type: String },
+      stock: { type: Number, default: 0 },
+    },
+  ],
 });
 
 const ProductDublin =
-  mongoose.models.ProductDublin || mongoose.model("ProductDublin", ProductSchema);
+  mongoose.models.ProductDublin ||
+  mongoose.model("ProductDublin", ProductSchema);
 
 export default ProductDublin;

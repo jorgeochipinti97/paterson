@@ -19,6 +19,38 @@ import { useForm } from "react-hook-form";
 export const ProductForm = ({ product }) => {
   const fileTypes = ["JPG", "PNG", "GIF", "JPEG", "AVIF", "WEBP"];
   const [images_, setImages_] = useState([]);
+const [sizes,setSizes] = useState()
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    getValues,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    if (product) {
+      setValue("images", product.images);
+      setSizes(product.sizes || []);
+    }
+  }, [product, setValue]);
+
+
+
+  useEffect(() => {
+    if (product) {
+      setValue("images", product.images);
+      product.sizes.forEach((size) => {
+        setValue(size.size, size.stock);
+      });
+    }
+  }, [product, setValue]);
+
+  const handleSizeChange = (size, value) => {
+    setValue(size, parseInt(value, 10)); // Directly set the value of the size
+  };
+
   useEffect(() => {
     product && setValue("images", product.images);
     product && setImages_(product.images);
@@ -27,7 +59,6 @@ export const ProductForm = ({ product }) => {
     product && setValue("description", product.description);
     product && setValue("discountPrice", product.discountPrice);
     product && setValue("category", product.category);
-    product && setValue("subcategory", product.subcategory);
   }, [product]);
 
   const handleFileChange = async (file) => {
@@ -38,7 +69,7 @@ export const ProductForm = ({ product }) => {
       formData.append("upload_preset", "ml_default");
 
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/dplhpsznx/image/upload`,
+        `https://api.cloudinary.com/v1_1/dwupzgtpo/image/upload`,
         formData
       );
       const data = response.data;
@@ -60,23 +91,19 @@ export const ProductForm = ({ product }) => {
     setImages_(newImages);
     setValue("images", newImages);
   };
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useForm();
 
   const onSubmit = async (data) => {
     if (!product) {
-      const response = await axios.post("/api/products", data);
+      const response = await axios.post("/api/products", {
+        ...data,
+        sizes: sizes,
+      });
       console.log(response);
-      console.log(data);
     } else {
       const response = await axios.put("/api/products", {
         _id: product._id,
         ...data,
+        sizes: sizes,
       });
       console.log(response);
       console.log(data);
@@ -128,6 +155,15 @@ export const ProductForm = ({ product }) => {
           className="my-2"
           {...register("description")}
         />
+        {["S", "M", "L", "1", "2", "3"].map((size) => (
+          <Input
+            key={size}
+            placeholder={`Stock for ${size}`}
+            type="number"
+            {...register(size)}
+            onChange={(e) => handleSizeChange(size, e.target.value)}
+          />
+        ))}
         <section className="my-2">
           <Select onValueChange={(e) => setValue("category", e)}>
             <SelectTrigger className="w-[300px]">
@@ -136,46 +172,9 @@ export const ProductForm = ({ product }) => {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Categoria</SelectLabel>
-                <SelectItem value="informatico">
-                  Componentes Informaticos
-                </SelectItem>
-                <SelectItem value="gaming">Consolas Gaming</SelectItem>
-                <SelectItem value="tablet">Tablets</SelectItem>
-                <SelectItem value="notebook">Notebooks</SelectItem>
-                <SelectItem value="sonido">Sonido</SelectItem>
+                <SelectItem value="hoodie">Hoodie</SelectItem>
+                <SelectItem value="remera">Remera</SelectItem>
                 <SelectItem value="accesorios">Accesorios</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </section>
-
-        <section>
-          <Select onValueChange={(e) => setValue("subcategory", e)}>
-            {" "}
-            <SelectTrigger className="w-[300px]">
-              <SelectValue placeholder="Selecciona una subcategoria" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Categoria</SelectLabel>
-                <SelectItem value="informatico">
-                  Componentes Informaticos
-                </SelectItem>
-                <SelectItem value="gabinete">Gabinete</SelectItem>
-                <SelectItem value="tablet">Tables</SelectItem>
-                <SelectItem value="notebook">Notebooks</SelectItem>
-                <SelectItem value="sonido">Sonido</SelectItem>
-                <SelectItem value="motherboard">Motherboard</SelectItem>
-                <SelectItem value="placa">Placa de video</SelectItem>
-                <SelectItem value="procesador">Procesador</SelectItem>
-                <SelectItem value="ram">Memoria Ram</SelectItem>
-                <SelectItem value="discosolido">Disco Solido</SelectItem>
-                <SelectItem value="ipad">IPad</SelectItem>
-                <SelectItem value="amazon">Amazon</SelectItem>
-                <SelectItem value="applewatch">Apple Watch</SelectItem>
-                <SelectItem value="airpods">AirPods</SelectItem>
-                <SelectItem value="bose">Bose</SelectItem>
-                <SelectItem value="amazonecho">Amazon Echo</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

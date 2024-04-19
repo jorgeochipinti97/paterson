@@ -69,7 +69,7 @@ export const Cart = () => {
   return (
     <AlertDialog className="z-50">
       <AlertDialogTrigger asChild>
-        <Button variant="icon" className="bg-[#047857]">
+        <Button variant="icon" className="bg-[#f5f5f7]">
           <span className="bg-sky-50 border border-black px-2 text-black  absolute bottom-8 right-10 text-md font-geist rounded-full">
             {total}
           </span>
@@ -81,12 +81,12 @@ export const Cart = () => {
           >
             <g>
               <path
-                fill="#fff"
+                fill="#000"
                 d="M4.97 9.81A2 2 0 016.961 8H17.04a2 2 0 011.99 1.81l.762 8a2 2 0 01-1.99 2.19H6.2a2 2 0 01-1.991-2.19l.761-8z"
                 opacity="0.15"
               ></path>
               <path
-                stroke="#fff"
+                stroke="#000"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="1.5"

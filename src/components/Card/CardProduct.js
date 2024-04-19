@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Card,
@@ -15,20 +15,23 @@ import { useAlert } from "@/hook/useAlert";
 import { AlertComponent } from "../ui/AlertComponent";
 import gsap, { Power1 } from "gsap";
 export const CardProduct = ({ product }) => {
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
   const agregarProducto = useCartStore((state) => state.agregarProducto);
 
   return (
     <Card className="relative w-10/12 md:w-8/12 my-5 md:my-0 cursor-pointer h-fit rounded-lg overflow-hidden shadow-lg bg-white/90 border-none">
-      <div className="flex justify-center">
-        <img
-          src={product.images[0]}
-          alt={"productName"}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-xl h-[200px] mt-5 "
-        />
-      </div>
       <CardContent className="">
+        <div className="flex justify-center items-start">
+          <img
+            src={product.images[0]}
+            alt={"productName"}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-xl  mt-5 "
+          />
+        </div>
         <CardTitle className=" text-md mt-2 font-geist  ">
           {product.title}
         </CardTitle>
