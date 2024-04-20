@@ -86,7 +86,7 @@ export default function Home() {
             style={{ opacity: 0.5 }}
             className="text-three text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20"
           >
-            NEW DROP FW24'
+            NEW DROP FW24
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 mt-10 w-screen">
             {products &&
