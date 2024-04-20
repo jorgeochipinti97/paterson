@@ -72,7 +72,7 @@ export default function Home() {
       <div className="h-fit relative w-full overflow-hidden  py-10">
         <div className="flex justify-center mt-10 ">
           <video
-            src="/video.mp4"
+            src="https://res.cloudinary.com/dwtnrs4ix/video/upload/v1713624576/zgfzlu9g1eyxq9vc0wf1.mp4"
             className=" w-9/12 md:w-3/12 rounded-xl shadowBoxLow"
             autoPlay
             loop
