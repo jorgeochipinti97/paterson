@@ -34,11 +34,7 @@ export const calcularComisionMercadoPago = (precio) => {
   // Paso 3: Sumar el 6.5% y el 21% del 6.5% al precio original
   const subtotal = precio + comisionBase + ivaComision;
 
-  // Paso 4: Calcular el 21% del total resultante
-  const ivaTotal = subtotal * 0.21;
-
-  // Paso 5: Sumar ese 21% al total del paso 3 para obtener el precio final
-  const precioFinal = subtotal + ivaTotal;
+  const precioFinal = subtotal
 
   return precioFinal;
 };
