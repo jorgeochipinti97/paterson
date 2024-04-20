@@ -128,23 +128,23 @@ export const Cart = () => {
                         <Button
                           variant="outline"
                           className="mx-1"
-                          onClick={() => incrementarCantidad(producto.title)}
-                        >
+                          onClick={() => incrementarCantidad(producto.title, producto.size)}
+                          >
                           +
                         </Button>
                         <Button
                           variant="outline"
                           className="mx-1"
-                          onClick={() => decrementarCantidad(producto.title)}
-                        >
+                          onClick={() => decrementarCantidad(producto.title, producto.size)}
+                          >
                           -
                         </Button>
                       </div>
                       <Button
                         className="mt-2"
                         variant="outline"
-                        onClick={() => removerProducto(producto.title)}
-                      >
+                        onClick={() => removerProducto(producto.title, producto.size)}
+                        >
                         Quitar
                       </Button>
                     </TableCell>
