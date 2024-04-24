@@ -7,11 +7,31 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "../ui/button";
 import { formatPrice } from "@/lib/utils";
 import { CheckoutForm } from "../Forms/checkoutForms";
 import useCartStore from "@/hook/useCartStore";
 import gsap, { Power1 } from "gsap";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 export const CardProduct = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState();
   useEffect(() => {
@@ -33,13 +53,23 @@ export const CardProduct = ({ product }) => {
     <Card className="relative w-10/12 shadowBoxLow md:w-8/12 my-5 md:my-0 cursor-pointer h-fit rounded-lg overflow-hidden shadow-lg bg-black/90 border-none">
       <CardContent className="">
         <div className="flex justify-center items-start">
-          <img
-            src={product.images[0]}
-            alt={"productName"}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-xl  mt-5 "
-          />
+          <Carousel className="w-9/12">
+            <CarouselContent>
+              {product.images.map((e) => (
+                <CarouselItem>
+                  <img
+                    src={e}
+                    alt={"productName"}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-xl  mt-5 "
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
         <CardTitle
           className=" text-xl mt-2 font-geist  text-white  
@@ -47,15 +77,30 @@ tracking-tighter"
         >
           {product.title}
         </CardTitle>
-        <CardDescription className="flex justify-around mt-2">
-          <span className="text-red-700 text-xl  mr-2 line-through	 font-geist tracking-tighter">
-            {" "}
-            {formatPrice(product.price)}
-          </span>
-          <span className="font-bold  text-xl  text-white font-geist tracking-tighter">
-            {" "}
-            {formatPrice(product.discountPrice)}
-          </span>
+        <CardDescription className="">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="outline" className='my-4'>Ver descripción</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogDescription>
+                {product.description}
+              </AlertDialogDescription>
+              <AlertDialogFooter>
+                <AlertDialogAction>volver</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <div className="flex justify-around mt-2">
+            <span className="text-red-700 text-xl  mr-2 line-through	 font-geist tracking-tighter">
+              {" "}
+              {formatPrice(product.price)}
+            </span>
+            <span className="font-bold  text-xl  text-white font-geist tracking-tighter">
+              {" "}
+              {formatPrice(product.discountPrice)}
+            </span>
+          </div>
         </CardDescription>
         <div className="flex mt-5 flex-wrap justify-start">
           {filteredSizes.length > 0 ? (
@@ -78,7 +123,7 @@ tracking-tighter"
         <div className="flex flex-col items-start justify-center mt-5">
           <div className="my-1">
             <CheckoutForm
-            size={selectedSize}
+              size={selectedSize}
               total={product.discountPrice}
               products={[
                 {
@@ -91,7 +136,7 @@ tracking-tighter"
           </div>
           <div className="my-1">
             <Button
-            disabled={!selectedSize}
+              disabled={!selectedSize}
               variant="outline"
               className="text-md font-geist tracking-tighter"
               onClick={() => {

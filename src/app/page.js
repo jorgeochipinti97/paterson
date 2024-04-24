@@ -84,7 +84,7 @@ export default function Home() {
         <section>
           <p
             style={{ opacity: 0.5 }}
-            className="text-three text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20"
+            className="text-three text-4xl md:text-7xl text-center text-white   font-extrabold uppercase tracking-tighter font-geist mt-20"
           >
             NEW DROP FW24
           </p>
