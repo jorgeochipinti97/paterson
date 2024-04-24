@@ -55,8 +55,8 @@ export const CardProduct = ({ product }) => {
         <div className="flex justify-center items-start">
           <Carousel className="w-9/12">
             <CarouselContent>
-              {product.images.map((e) => (
-                <CarouselItem>
+              {product.images.map((e,index) => (
+                <CarouselItem key={index}>
                   <img
                     src={e}
                     alt={"productName"}
