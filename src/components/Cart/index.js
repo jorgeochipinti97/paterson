@@ -30,18 +30,20 @@ import { calcularComisionMercadoPago, formatPrice } from "@/lib/utils";
 export const Cart = () => {
   const productos = useCartStore((state) => state.productos);
   const removerProducto = useCartStore((state) => state.removerProducto);
+
+
   const decrementarCantidad = useCartStore(
     (state) => state.decrementarCantidad
-  );
-
-  const montoTotal = productos.reduce(
-    (acc, producto) => acc + producto.price * producto.quantity,
-    0
   );
 
   const incrementarCantidad = useCartStore(
     (state) => state.incrementarCantidad
   );
+  const montoTotal = productos.reduce(
+    (acc, producto) => acc + producto.price * producto.quantity,
+    0
+  );
+
 
   const total = useCartStore((state) =>
     state.productos.reduce((acc, producto) => acc + producto.quantity, 0)

@@ -11,7 +11,7 @@ import gsap from "gsap";
 import { useEffect, useState } from "react";
 
 const Page = () => {
-  const password = "ferro123";
+  const password = "Paterson2020";
   const [password_, setPassword_] = useState();
   useEffect(() => {
     if (password == password_) {
@@ -56,7 +56,6 @@ const Page = () => {
               <TabsTrigger value="account">Crear Producto</TabsTrigger>
               <TabsTrigger value="products">Productos</TabsTrigger>
               <TabsTrigger value="orders">Ordenes</TabsTrigger>
-              <TabsTrigger value="guia">Guia</TabsTrigger>
             </TabsList>
             <TabsContent value="account">
               <ProductForm />
@@ -66,9 +65,6 @@ const Page = () => {
             </TabsContent>
             <TabsContent value="orders">
               <TableOrders />
-            </TabsContent>
-            <TabsContent value="guia">
-              <TableGuide />
             </TabsContent>
           </Tabs>
         </ScrollArea>
